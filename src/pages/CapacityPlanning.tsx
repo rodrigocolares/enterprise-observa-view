@@ -31,7 +31,7 @@ export default function CapacityPlanning() {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <KpiCard label="Avg CPU Growth" value="+4.2%/mo" icon={TrendingUp} accent="primary" />
-        <KpiCard label="Avg Memory Growth" value="+3.1%/mo" icon={TrendingUp} accent="accent" as any />
+        <KpiCard label="Avg Memory Growth" value="+3.1%/mo" icon={TrendingUp} accent="info" />
         <KpiCard label="Avg Storage Growth" value="+6.8%/mo" icon={Database} accent="warning" />
       </div>
 
