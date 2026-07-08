@@ -65,7 +65,10 @@ export default function ServerInventory() {
           <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">Server Inventory</h1>
           <p className="text-sm text-muted-foreground">{rows.length.toLocaleString()} hosts after filters</p>
         </div>
-        <Button onClick={exportCSV} variant="outline" size="sm" className="gap-1.5"><Download className="h-4 w-4" /> Export CSV</Button>
+        <div className="flex items-center gap-2">
+          <AddServerDialog />
+          <Button onClick={exportCSV} variant="outline" size="sm" className="gap-1.5"><Download className="h-4 w-4" /> Export CSV</Button>
+        </div>
       </div>
 
       <PanelCard title="Advanced Filters">
