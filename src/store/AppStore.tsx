@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { aggregate, buildServers, createServer, CreateServerInput, getSeries, pushSeries, Server, tickServers, Aggregates } from "@/lib/mockData";
+import { aggregate, buildServers, CreateServerInput, getSeries, pushSeries, Server, tickServers, Aggregates } from "@/lib/mockData";
+import { serverRepository } from "@/repository/ServerRepository";
 import { toast } from "sonner";
 
 export interface GlobalFilter {
