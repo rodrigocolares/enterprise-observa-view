@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Download, ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 import { AddServerDialog } from "@/components/AddServerDialog";
 
 export default function ServerInventory() {
