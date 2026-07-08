@@ -127,7 +127,7 @@ export default function ServerInventory() {
         {view.map((s) => (
           <div key={s.id} className="rounded-lg border border-border bg-card p-3 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="font-mono text-xs">{s.hostname}</div>
+              <Link to={`/inventory/server/${s.id}`} className="font-mono text-xs hover:text-primary hover:underline underline-offset-2">{s.hostname}</Link>
               <StatusBadge status={s.status} />
             </div>
             <div className="text-[11px] text-muted-foreground">{s.os} · {s.version} · {s.datacenter} · {s.environment}</div>
