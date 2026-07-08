@@ -83,9 +83,9 @@ export function AppStoreProvider({ children }: { children: React.ReactNode }) {
       series: getSeries(),
       filter, setFilter,
       autoRefresh, setAutoRefresh, intervalSec, setIntervalSec,
-      lastRefresh, refreshNow, loading,
+      lastRefresh, refreshNow, addServer, loading,
     };
-  }, [filter, autoRefresh, intervalSec, lastRefresh, loading, refreshNow, setFilter]);
+  }, [filter, autoRefresh, intervalSec, lastRefresh, loading, refreshNow, addServer, setFilter]);
 
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }
