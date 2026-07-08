@@ -33,6 +33,7 @@ const App = () => (
             <Route element={<AppLayout />}>
               <Route path="/" element={<ExecutiveDashboard />} />
               <Route path="/inventory" element={<ServerInventory />} />
+              <Route path="/inventory/server/:id" element={<ServerDetail />} />
               <Route path="/observability" element={<DatadogObservability />} />
               <Route path="/alerts" element={<AlertCenter />} />
               <Route path="/incidents" element={<IncidentManagement />} />
