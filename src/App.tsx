@@ -7,6 +7,7 @@ import { AppStoreProvider } from "@/store/AppStore";
 import AppLayout from "@/components/AppLayout";
 import ExecutiveDashboard from "./pages/ExecutiveDashboard";
 import ServerInventory from "./pages/ServerInventory";
+import ServerDetail from "./pages/ServerDetail";
 import DatadogObservability from "./pages/DatadogObservability";
 import AlertCenter from "./pages/AlertCenter";
 import IncidentManagement from "./pages/IncidentManagement";
