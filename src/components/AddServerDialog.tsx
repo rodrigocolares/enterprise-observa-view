@@ -250,36 +250,36 @@ export function AddServerDialog() {
               <div className="max-h-[60vh] overflow-y-auto px-5 py-4">
                 <TabsContent value="general" className="mt-0 space-y-4">
                   <div className="grid md:grid-cols-2 gap-3">
-                    <Field label="Hostname *" error={errors.hostname?.message}>
+                    <Field label="Hostname *" error={errors.hostname?.message as string | undefined}>
                       <Input {...register("hostname")} placeholder="lnx-app-sp01-1234" className="font-mono" autoFocus />
                     </Field>
-                    <Field label="FQDN" error={errors.fqdn?.message}>
+                    <Field label="FQDN" error={errors.fqdn?.message as string | undefined}>
                       <Input {...register("fqdn")} placeholder="host.corp.example.com" className="font-mono" />
                     </Field>
-                    <Field label="Alias" error={errors.alias?.message}>
+                    <Field label="Alias" error={errors.alias?.message as string | undefined}>
                       <Input {...register("alias")} placeholder="Friendly name" />
                     </Field>
-                    <Field label="OS *" error={errors.os?.message}>
+                    <Field label="OS *" error={errors.os?.message as string | undefined}>
                       <ControlledSelect name="os" control={control} options={OS_OPTS as unknown as string[]} placeholder="Select OS"
                         onAfterChange={() => setValue("version", "" as never, { shouldValidate: true })} />
                     </Field>
-                    <Field label="Version *" error={errors.version?.message}>
+                    <Field label="Version *" error={errors.version?.message as string | undefined}>
                       <ControlledSelect
                         name="version" control={control}
                         options={values.os === "Linux" ? LINUX_VERSIONS : values.os === "Windows" ? WIN_VERSIONS : []}
                         placeholder={values.os ? "Select version" : "Select OS first"}
                       />
                     </Field>
-                    <Field label="Environment *" error={errors.environment?.message}>
+                    <Field label="Environment *" error={errors.environment?.message as string | undefined}>
                       <ControlledSelect name="environment" control={control} options={ENV_OPTS as unknown as string[]} placeholder="Select environment" />
                     </Field>
-                    <Field label="Application *" error={errors.application?.message}>
+                    <Field label="Application *" error={errors.application?.message as string | undefined}>
                       <Input {...register("application")} placeholder="SAP, Oracle, IIS…" />
                     </Field>
-                    <Field label="Datacenter *" error={errors.datacenter?.message}>
+                    <Field label="Datacenter *" error={errors.datacenter?.message as string | undefined}>
                       <ControlledSelect name="datacenter" control={control} options={DC_OPTS as unknown as string[]} placeholder="Select DC" />
                     </Field>
-                    <Field label="Status *" error={errors.status?.message}>
+                    <Field label="Status *" error={errors.status?.message as string | undefined}>
                       <Controller name="status" control={control} render={({ field }) => (
                         <Select value={field.value ?? ""} onValueChange={field.onChange}>
                           <SelectTrigger className="h-9"><SelectValue placeholder="Select status" /></SelectTrigger>
@@ -289,7 +289,7 @@ export function AddServerDialog() {
                         </Select>
                       )} />
                     </Field>
-                    <Field label="Criticality *" error={errors.criticality?.message}>
+                    <Field label="Criticality *" error={errors.criticality?.message as string | undefined}>
                       <ControlledSelect name="criticality" control={control} options={CRIT_OPTS as unknown as string[]} placeholder="Select criticality" />
                     </Field>
                   </div>
@@ -297,19 +297,19 @@ export function AddServerDialog() {
 
                 <TabsContent value="hardware" className="mt-0 space-y-4">
                   <div className="grid md:grid-cols-3 gap-3">
-                    <Field label="CPUs" error={errors.cpuCount?.message}>
+                    <Field label="CPUs" error={errors.cpuCount?.message as string | undefined}>
                       <Input type="number" min={0} {...register("cpuCount")} />
                     </Field>
-                    <Field label="Cores" error={errors.cores?.message}>
+                    <Field label="Cores" error={errors.cores?.message as string | undefined}>
                       <Input type="number" min={0} {...register("cores")} />
                     </Field>
-                    <Field label="RAM (GB)" error={errors.ramGB?.message}>
+                    <Field label="RAM (GB)" error={errors.ramGB?.message as string | undefined}>
                       <Input type="number" min={0} {...register("ramGB")} />
                     </Field>
-                    <Field label="Disk Total (GB)" error={errors.diskTotalGB?.message}>
+                    <Field label="Disk Total (GB)" error={errors.diskTotalGB?.message as string | undefined}>
                       <Input type="number" min={0} {...register("diskTotalGB")} />
                     </Field>
-                    <Field label="Disk Free (GB)" error={errors.diskFreeGB?.message}>
+                    <Field label="Disk Free (GB)" error={errors.diskFreeGB?.message as string | undefined}>
                       <Input type="number" min={0} {...register("diskFreeGB")} />
                     </Field>
                     <Field label="Disk Usage (auto)">
@@ -327,25 +327,25 @@ export function AddServerDialog() {
 
                 <TabsContent value="network" className="mt-0 space-y-4">
                   <div className="grid md:grid-cols-2 gap-3">
-                    <Field label="IPv4" error={errors.ipAddress?.message}>
+                    <Field label="IPv4" error={errors.ipAddress?.message as string | undefined}>
                       <Input {...register("ipAddress")} placeholder="10.20.30.40" className="font-mono" />
                     </Field>
-                    <Field label="IPv6" error={errors.ipv6?.message}>
+                    <Field label="IPv6" error={errors.ipv6?.message as string | undefined}>
                       <Input {...register("ipv6")} placeholder="2001:db8::1" className="font-mono" />
                     </Field>
-                    <Field label="Gateway" error={errors.gateway?.message}>
+                    <Field label="Gateway" error={errors.gateway?.message as string | undefined}>
                       <Input {...register("gateway")} placeholder="10.20.30.1" className="font-mono" />
                     </Field>
-                    <Field label="VLAN" error={errors.vlan?.message}>
+                    <Field label="VLAN" error={errors.vlan?.message as string | undefined}>
                       <Input {...register("vlan")} placeholder="1042" />
                     </Field>
-                    <Field label="DNS Primary" error={errors.dnsPrimary?.message}>
+                    <Field label="DNS Primary" error={errors.dnsPrimary?.message as string | undefined}>
                       <Input {...register("dnsPrimary")} placeholder="8.8.8.8" className="font-mono" />
                     </Field>
-                    <Field label="DNS Secondary" error={errors.dnsSecondary?.message}>
+                    <Field label="DNS Secondary" error={errors.dnsSecondary?.message as string | undefined}>
                       <Input {...register("dnsSecondary")} placeholder="1.1.1.1" className="font-mono" />
                     </Field>
-                    <Field label="MAC Address" error={errors.macAddress?.message}>
+                    <Field label="MAC Address" error={errors.macAddress?.message as string | undefined}>
                       <Input {...register("macAddress")} placeholder="aa:bb:cc:dd:ee:ff" className="font-mono" />
                     </Field>
                   </div>
@@ -353,26 +353,26 @@ export function AddServerDialog() {
 
                 <TabsContent value="owners" className="mt-0 space-y-4">
                   <div className="grid md:grid-cols-2 gap-3">
-                    <Field label="Owner" error={errors.owner?.message}>
+                    <Field label="Owner" error={errors.owner?.message as string | undefined}>
                       <Input {...register("owner")} placeholder="John Doe" />
                     </Field>
-                    <Field label="Squad" error={errors.squad?.message}>
+                    <Field label="Squad" error={errors.squad?.message as string | undefined}>
                       <Input {...register("squad")} placeholder="Platform Squad" />
                     </Field>
-                    <Field label="Responsible Team" error={errors.team?.message}>
+                    <Field label="Responsible Team" error={errors.team?.message as string | undefined}>
                       <Input {...register("team")} placeholder="Infrastructure" />
                     </Field>
-                    <Field label="Manager" error={errors.manager?.message}>
+                    <Field label="Manager" error={errors.manager?.message as string | undefined}>
                       <Input {...register("manager")} placeholder="Jane Manager" />
                     </Field>
-                    <Field label="Cost Center" error={errors.costCenter?.message}>
+                    <Field label="Cost Center" error={errors.costCenter?.message as string | undefined}>
                       <Input {...register("costCenter")} placeholder="CC-1042" />
                     </Field>
                   </div>
                 </TabsContent>
 
                 <TabsContent value="notes" className="mt-0 space-y-4">
-                  <Field label="Notes (Markdown supported)" error={errors.notes?.message}>
+                  <Field label="Notes (Markdown supported)" error={errors.notes?.message as string | undefined}>
                     <Textarea rows={8} {...register("notes")} placeholder="**Runbook:** …&#10;- Backup at 02:00&#10;- Contact: ops@corp" />
                   </Field>
                   <Field label="Tags">
