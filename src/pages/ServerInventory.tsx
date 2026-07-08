@@ -98,7 +98,9 @@ export default function ServerInventory() {
             <TableBody>
               {view.map((s) => (
                 <TableRow key={s.id} className="border-border">
-                  <TableCell className="font-mono text-xs">{s.hostname}</TableCell>
+                  <TableCell className="font-mono text-xs">
+                    <Link to={`/inventory/server/${s.id}`} className="hover:text-primary hover:underline underline-offset-2">{s.hostname}</Link>
+                  </TableCell>
                   <TableCell>{s.os}</TableCell>
                   <TableCell className="text-xs text-muted-foreground">{s.version}</TableCell>
                   <TableCell>{s.environment}</TableCell>
