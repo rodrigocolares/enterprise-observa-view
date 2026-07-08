@@ -22,6 +22,7 @@ interface AppCtxValue {
   setIntervalSec: (n: number) => void;
   lastRefresh: number;
   refreshNow: () => void;
+  addServer: (input: CreateServerInput) => Server;
   loading: boolean;
 }
 
