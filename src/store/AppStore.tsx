@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { aggregate, buildServers, createServer, CreateServerInput, getSeries, pushSeries, Server, tickServers, Aggregates } from "@/lib/mockData";
+import { aggregate, buildServers, CreateServerInput, getSeries, pushSeries, Server, tickServers, Aggregates } from "@/lib/mockData";
+import { serverRepository } from "@/repository/ServerRepository";
 import { toast } from "sonner";
 
 export interface GlobalFilter {
@@ -39,6 +40,7 @@ export function AppStoreProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     serversRef.current = buildServers();
+    serverRepository.seed(serversRef.current);
     pushSeries(serversRef.current);
     const t = setTimeout(() => setLoading(false), 900);
     return () => clearTimeout(t);
@@ -52,8 +54,9 @@ export function AppStoreProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const addServer = useCallback((input: CreateServerInput) => {
-    const s = createServer(input);
-    serversRef.current = [s, ...serversRef.current];
+    const s = serverRepository.createServer(input);
+    // repository mutates the same underlying array (seeded above)
+    serversRef.current = serverRepository.list();
     setLastRefresh(Date.now());
     force((x) => x + 1);
     return s;

@@ -7,6 +7,7 @@ import { AppStoreProvider } from "@/store/AppStore";
 import AppLayout from "@/components/AppLayout";
 import ExecutiveDashboard from "./pages/ExecutiveDashboard";
 import ServerInventory from "./pages/ServerInventory";
+import ServerDetail from "./pages/ServerDetail";
 import DatadogObservability from "./pages/DatadogObservability";
 import AlertCenter from "./pages/AlertCenter";
 import IncidentManagement from "./pages/IncidentManagement";
@@ -32,6 +33,7 @@ const App = () => (
             <Route element={<AppLayout />}>
               <Route path="/" element={<ExecutiveDashboard />} />
               <Route path="/inventory" element={<ServerInventory />} />
+              <Route path="/inventory/server/:id" element={<ServerDetail />} />
               <Route path="/observability" element={<DatadogObservability />} />
               <Route path="/alerts" element={<AlertCenter />} />
               <Route path="/incidents" element={<IncidentManagement />} />

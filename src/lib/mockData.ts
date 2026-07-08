@@ -27,14 +27,38 @@ export interface Server {
   alerts: number;
   lastCheckIn: number; // epoch ms
   status: Status;
+  // Extended enterprise fields (all optional for backward compatibility)
+  fqdn?: string;
+  alias?: string;
+  cpuCount?: number;
+  cores?: number;
+  ramGB?: number;
+  diskTotalGB?: number;
+  diskFreeGB?: number;
   ipAddress?: string;
+  ipv6?: string;
+  gateway?: string;
+  vlan?: string;
+  dnsPrimary?: string;
+  dnsSecondary?: string;
+  macAddress?: string;
   owner?: string;
+  squad?: string;
+  team?: string;
+  manager?: string;
+  costCenter?: string;
   notes?: string;
+  tags?: string[];
+  healthScore?: number;
+  createdAt?: number;
+  updatedAt?: number;
 }
 
-// Service-layer factory. Ready to be swapped for a real API call later.
+// Service-layer input. Ready to be swapped for a real API call later.
 export interface CreateServerInput {
   hostname: string;
+  fqdn?: string;
+  alias?: string;
   os: OS;
   version: string;
   environment: Environment;
@@ -45,16 +69,33 @@ export interface CreateServerInput {
   cpu: number;
   memory: number;
   disk: number;
+  cpuCount?: number;
+  cores?: number;
+  ramGB?: number;
+  diskTotalGB?: number;
+  diskFreeGB?: number;
   ipAddress?: string;
+  ipv6?: string;
+  gateway?: string;
+  vlan?: string;
+  dnsPrimary?: string;
+  dnsSecondary?: string;
+  macAddress?: string;
   owner?: string;
+  squad?: string;
+  team?: string;
+  manager?: string;
+  costCenter?: string;
   notes?: string;
+  tags?: string[];
 }
 
+// Legacy helper — kept for compatibility. New code should use ServerRepository.
 export function createServer(input: CreateServerInput): Server {
   const now = Date.now();
   const idSuffix = Math.floor(Math.random() * 90000 + 10000);
   return {
-    id: `srv-${idSuffix}`,
+    id: `SRV-${String(idSuffix).padStart(6, "0")}`,
     hostname: input.hostname,
     os: input.os,
     version: input.version,
@@ -73,9 +114,29 @@ export function createServer(input: CreateServerInput): Server {
     alerts: 0,
     lastCheckIn: now,
     status: input.status,
+    fqdn: input.fqdn,
+    alias: input.alias,
+    cpuCount: input.cpuCount,
+    cores: input.cores,
+    ramGB: input.ramGB,
+    diskTotalGB: input.diskTotalGB,
+    diskFreeGB: input.diskFreeGB,
     ipAddress: input.ipAddress,
+    ipv6: input.ipv6,
+    gateway: input.gateway,
+    vlan: input.vlan,
+    dnsPrimary: input.dnsPrimary,
+    dnsSecondary: input.dnsSecondary,
+    macAddress: input.macAddress,
     owner: input.owner,
+    squad: input.squad,
+    team: input.team,
+    manager: input.manager,
+    costCenter: input.costCenter,
     notes: input.notes,
+    tags: input.tags,
+    createdAt: now,
+    updatedAt: now,
   };
 }
 

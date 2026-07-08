@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Download, ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 import { AddServerDialog } from "@/components/AddServerDialog";
 
 export default function ServerInventory() {
@@ -97,7 +98,9 @@ export default function ServerInventory() {
             <TableBody>
               {view.map((s) => (
                 <TableRow key={s.id} className="border-border">
-                  <TableCell className="font-mono text-xs">{s.hostname}</TableCell>
+                  <TableCell className="font-mono text-xs">
+                    <Link to={`/inventory/server/${s.id}`} className="hover:text-primary hover:underline underline-offset-2">{s.hostname}</Link>
+                  </TableCell>
                   <TableCell>{s.os}</TableCell>
                   <TableCell className="text-xs text-muted-foreground">{s.version}</TableCell>
                   <TableCell>{s.environment}</TableCell>
@@ -124,7 +127,7 @@ export default function ServerInventory() {
         {view.map((s) => (
           <div key={s.id} className="rounded-lg border border-border bg-card p-3 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="font-mono text-xs">{s.hostname}</div>
+              <Link to={`/inventory/server/${s.id}`} className="font-mono text-xs hover:text-primary hover:underline underline-offset-2">{s.hostname}</Link>
               <StatusBadge status={s.status} />
             </div>
             <div className="text-[11px] text-muted-foreground">{s.os} · {s.version} · {s.datacenter} · {s.environment}</div>
