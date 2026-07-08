@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { aggregate, buildServers, getSeries, pushSeries, Server, tickServers, Aggregates } from "@/lib/mockData";
+import { aggregate, buildServers, createServer, CreateServerInput, getSeries, pushSeries, Server, tickServers, Aggregates } from "@/lib/mockData";
 import { toast } from "sonner";
 
 export interface GlobalFilter {
@@ -22,6 +22,7 @@ interface AppCtxValue {
   setIntervalSec: (n: number) => void;
   lastRefresh: number;
   refreshNow: () => void;
+  addServer: (input: CreateServerInput) => Server;
   loading: boolean;
 }
 
@@ -50,6 +51,14 @@ export function AppStoreProvider({ children }: { children: React.ReactNode }) {
     force((x) => x + 1);
   }, []);
 
+  const addServer = useCallback((input: CreateServerInput) => {
+    const s = createServer(input);
+    serversRef.current = [s, ...serversRef.current];
+    setLastRefresh(Date.now());
+    force((x) => x + 1);
+    return s;
+  }, []);
+
   useEffect(() => {
     if (!autoRefresh || loading) return;
     const id = setInterval(refreshNow, intervalSec * 1000);
@@ -74,9 +83,9 @@ export function AppStoreProvider({ children }: { children: React.ReactNode }) {
       series: getSeries(),
       filter, setFilter,
       autoRefresh, setAutoRefresh, intervalSec, setIntervalSec,
-      lastRefresh, refreshNow, loading,
+      lastRefresh, refreshNow, addServer, loading,
     };
-  }, [filter, autoRefresh, intervalSec, lastRefresh, loading, refreshNow, setFilter]);
+  }, [filter, autoRefresh, intervalSec, lastRefresh, loading, refreshNow, addServer, setFilter]);
 
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

@@ -27,6 +27,56 @@ export interface Server {
   alerts: number;
   lastCheckIn: number; // epoch ms
   status: Status;
+  ipAddress?: string;
+  owner?: string;
+  notes?: string;
+}
+
+// Service-layer factory. Ready to be swapped for a real API call later.
+export interface CreateServerInput {
+  hostname: string;
+  os: OS;
+  version: string;
+  environment: Environment;
+  application: string;
+  criticality: Criticality;
+  datacenter: Datacenter;
+  status: Status;
+  cpu: number;
+  memory: number;
+  disk: number;
+  ipAddress?: string;
+  owner?: string;
+  notes?: string;
+}
+
+export function createServer(input: CreateServerInput): Server {
+  const now = Date.now();
+  const idSuffix = Math.floor(Math.random() * 90000 + 10000);
+  return {
+    id: `srv-${idSuffix}`,
+    hostname: input.hostname,
+    os: input.os,
+    version: input.version,
+    environment: input.environment,
+    application: input.application,
+    criticality: input.criticality,
+    datacenter: input.datacenter,
+    cpu: input.cpu,
+    memory: input.memory,
+    disk: input.disk,
+    network: 200,
+    latency: 40,
+    uptimeDays: 0,
+    availability: input.status === "offline" ? 0 : 99.9,
+    incidents: 0,
+    alerts: 0,
+    lastCheckIn: now,
+    status: input.status,
+    ipAddress: input.ipAddress,
+    owner: input.owner,
+    notes: input.notes,
+  };
 }
 
 const APPS = [
