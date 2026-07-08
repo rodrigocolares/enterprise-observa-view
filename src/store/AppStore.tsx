@@ -51,6 +51,14 @@ export function AppStoreProvider({ children }: { children: React.ReactNode }) {
     force((x) => x + 1);
   }, []);
 
+  const addServer = useCallback((input: CreateServerInput) => {
+    const s = createServer(input);
+    serversRef.current = [s, ...serversRef.current];
+    setLastRefresh(Date.now());
+    force((x) => x + 1);
+    return s;
+  }, []);
+
   useEffect(() => {
     if (!autoRefresh || loading) return;
     const id = setInterval(refreshNow, intervalSec * 1000);
